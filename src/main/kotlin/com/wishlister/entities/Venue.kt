@@ -8,7 +8,7 @@ import com.wishlister.entities.RatingLoadingStatus
  *
  * @author Vinicius Braz Pereira
  */
-public data class Venue
+public data class Venue 
 (
     val id:String,
     val name:String,
@@ -18,5 +18,13 @@ public data class Venue
     val stats:Stats,
     var ratingAvailability:RatingLoadingStatus = RatingLoadingStatus.NOT_LOADED,
     var rating:Double? = null
-)
+) {
+	
+}
+
+fun Venue () : Venue{
+	val location : Location = Location(null,null,null,null,null,null,null,null,null)
+	val stats : Stats = Stats(0, 0, 0)
+	return Venue("","", location, null,false, stats, RatingLoadingStatus.NOT_LOADED, null) 
+}
 

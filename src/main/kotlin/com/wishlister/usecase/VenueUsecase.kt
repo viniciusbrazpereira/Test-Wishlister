@@ -1,6 +1,8 @@
 package com.wishlister.usecase
 
 import com.wishlister.entities.SearchVenuesResponse
+import com.wishlister.entities.VenueDetailsResponse
+import com.wishlister.entities.VenueResponse
 import com.wishlister.entities.Venue
 import com.wishlister.entities.Category
 import com.wishlister.gateways.FoursquareGateway
@@ -26,19 +28,38 @@ class VenueUsecase {
 		val callResponse = foursquareGateway.searchVenue(client_id, client_secret, v, ll)
 		val response = callResponse.execute()
 		
-		val listVenue : List<Venue> = mutableListOf<Venue>()
+		val listVenue : MutableList<Venue>? = mutableListOf<Venue>()
 		
 		if (response.isSuccessful) {
-			response?.let {
-			    val searchVenuesResponse : SearchVenuesResponse = it.body()
-				for(venue in searchVenuesResponse.response.venues) {
-					listVenue.plus(venue)
+			val searchVenuesResponse : SearchVenuesResponse? = response.body()
+				for(venue in searchVenuesResponse!!.response.venues) {
+					listVenue!!.add(venue)
 				}
-				
-			}
 		}
 		
-        return listVenue
+        return listVenue!!.toList()
+    }
+	
+	fun findVenue(venueId : String) : Venue {
+		val retrofit = Retrofit.Builder()
+				.baseUrl(baseUrl)
+				.addConverterFactory(GsonConverterFactory.create())
+				.build()
+
+		val foursquareGateway: FoursquareGateway = retrofit.create(FoursquareGateway::class.java)
+		
+		val callResponse = foursquareGateway.findVenue(client_id, client_secret, v, venueId)
+		val response = callResponse.execute()
+		
+		val venue : Venue = Venue()
+		
+		if (response.isSuccessful) {
+			val venueDetailsResponse : VenueDetailsResponse? = response.body()
+			val venueResponse : VenueResponse =  venueDetailsResponse!!.response
+			return venueResponse.venue
+		} 
+		
+        return venue
     }
 	
 }

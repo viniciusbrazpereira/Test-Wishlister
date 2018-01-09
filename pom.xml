@@ -154,7 +154,8 @@
 					</dependency>
 				</dependencies>
             </plugin>
-            
+
+			<!--            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -185,6 +186,7 @@
                     <mainClass>${main.class}</mainClass>
                 </configuration>
             </plugin>
+                 -->
              
             <plugin>
                 <groupId>org.springframework.boot</groupId>

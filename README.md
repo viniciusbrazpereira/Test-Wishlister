@@ -10,4 +10,6 @@ Arquitetura do Projeto
 
 Run Project
 ----------------------				  
-mvn clean install				  
+mvn clean install
+
+http://localhost:8080/welcome				  
