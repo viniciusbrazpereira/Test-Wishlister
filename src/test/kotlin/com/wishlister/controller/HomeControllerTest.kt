@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.test.context.junit4.SpringRunner
 
-/* @RunWith(SpringRunner::class)
+@RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HomeControllerTest {
 	
@@ -17,16 +17,11 @@ class HomeControllerTest {
  
     @Test
     fun testGreeting() {
- 
-        // Given
-        val name = "Duke"
- 
         // When
-        val body = restTemplate.getForObject("/greeting/?name={name}", String::class.java, name)
+        val body = restTemplate.getForObject("/welcome", String::class.java)
 
         // Then
-        assertThat(body).contains(name)
- 
+        assertThat(body).isNotNull()
     }
 	
 	@Test
@@ -39,6 +34,5 @@ class HomeControllerTest {
  
     }
 }
-*/
 
 

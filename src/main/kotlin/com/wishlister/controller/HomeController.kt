@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam
 class HomeController {
 	
 	@RequestMapping("/welcome")
-    fun greeting(@RequestParam(value = "message", defaultValue = "HelloWorld!") message: String, model : Model) : String {
-        model.addAttribute("message", message)
+    fun welcome() : String {
         return "welcome"
     }
 	
