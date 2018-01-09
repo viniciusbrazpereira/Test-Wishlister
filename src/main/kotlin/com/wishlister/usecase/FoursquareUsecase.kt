@@ -11,7 +11,7 @@ import com.wishlister.gateways.FoursquareGateway
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class VenueUsecase {
+class FoursquareUsecase {
 	
 	private var baseUrl : String = "https://api.foursquare.com/"
 	private val client_id: String = "OJRCA0HT2UMLW4TJ4RER42OACUXITZ4VDMTUHXINVC5SYL1T"

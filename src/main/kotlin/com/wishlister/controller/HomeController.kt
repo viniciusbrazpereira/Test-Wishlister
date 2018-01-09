@@ -1,10 +1,8 @@
 package com.wishlister.controller
 
-import com.wishlister.usecase.VenueUsecase
+import com.wishlister.usecase.FoursquareUsecase
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class HomeController {
@@ -16,8 +14,7 @@ class HomeController {
 	
 	@RequestMapping("/foursquare/callback")
     fun callback() : String {
-		val venueUsecase = VenueUsecase()
-		venueUsecase.searchVenue()
+		FoursquareUsecase().searchVenue()
         return "venues"
     }
 
