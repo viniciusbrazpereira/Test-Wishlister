@@ -19,15 +19,22 @@ class VenueUsecase {
 	private val v: String = "20170801"
 	private val ll: String = "40.7243,-74.0018"
 	
-	fun searchVenue() : List<Venue> {
+	private fun getRetrofit() : Retrofit {
 		val retrofit = Retrofit.Builder()
 				.baseUrl(baseUrl)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build()
-
-		val foursquareGateway: FoursquareGateway = retrofit.create(FoursquareGateway::class.java)
 		
-		val callResponse = foursquareGateway.searchVenue(client_id, client_secret, v, ll)
+		return retrofit
+	}
+	
+	private fun getFoursquareGateway() : FoursquareGateway {
+		val foursquareGateway: FoursquareGateway = getRetrofit().create(FoursquareGateway::class.java)
+		return foursquareGateway
+	}
+	
+	fun searchVenue() : List<Venue> {
+		val callResponse = getFoursquareGateway().searchVenue(client_id, client_secret, v, ll)
 		val response = callResponse.execute()
 		
 		val listVenue : MutableList<Venue>? = mutableListOf<Venue>()
@@ -43,14 +50,7 @@ class VenueUsecase {
     }
 	
 	fun photos(venueId : String) : List<Item> {
-		val retrofit = Retrofit.Builder()
-				.baseUrl(baseUrl)
-				.addConverterFactory(GsonConverterFactory.create())
-				.build()
-
-		val foursquareGateway: FoursquareGateway = retrofit.create(FoursquareGateway::class.java)
-		
-		val callResponse = foursquareGateway.photos(venueId, client_id, client_secret, v)
+		val callResponse = getFoursquareGateway().photos(venueId, client_id, client_secret, v)
 		val response = callResponse.execute()
 		
 		val list : MutableList<Item>? = mutableListOf<Item>()

@@ -13,7 +13,8 @@ class VenueUsecaseTest {
 	}
 	
 	@Test fun testPhotos(): Unit {
-		val photos : List<Item> = VenueUsecase().photos("4a942a25f964a520972020e3")
+		val venueId : String =  "4a942a25f964a520972020e3"
+		val photos : List<Item> = VenueUsecase().photos(venueId)
 		assertTrue(photos.size > 0)
 	}
 	
