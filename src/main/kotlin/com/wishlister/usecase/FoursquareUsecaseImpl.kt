@@ -17,17 +17,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class FoursquareUsecaseImpl : FoursquareUsecase {
 	
-	private var baseUrl : String = "https://api.foursquare.com/"
-	private var baseUrlAuth : String = "https://foursquare.com/"
-	private val client_id: String = "OJRCA0HT2UMLW4TJ4RER42OACUXITZ4VDMTUHXINVC5SYL1T"
-	private val client_secret: String = "UT1QIQK2PEWTRZNFWZNEJNBMNFOZZFXGUEZUJ5HD5VX3D2QF"
-	private val v: String = "20170801"
-	private val ll: String = "40.7243,-74.0018"
-	private val code: String = "code"
-	private val grant_type: String = "authorization_code"
-	private var redirect_uri : String = "https://test-wishlister.herokuapp.com/foursquare/callback"
-	
-	private val access_token: String? = "ACCESS_TOKEN"
+	companion object {
+		val baseUrl : String = "https://api.foursquare.com/"
+		val baseUrlAuth : String = "https://foursquare.com/"
+		
+		val client_id: String = "OJRCA0HT2UMLW4TJ4RER42OACUXITZ4VDMTUHXINVC5SYL1T"
+		val client_secret: String = "UT1QIQK2PEWTRZNFWZNEJNBMNFOZZFXGUEZUJ5HD5VX3D2QF"
+		val v: String = "20170801"
+		val ll: String = "40.7243,-74.0018"
+		
+		val code: String = "code"
+		val grant_type: String = "authorization_code"
+		
+		val redirect_uri : String = "https://test-wishlister.herokuapp.com/foursquare/callback"
+	}
 	
 	private fun getRetrofit() : Retrofit {
 		val retrofit = Retrofit.Builder()
@@ -76,11 +79,13 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 		val callResponse : Call<AccessTokenResponse> = getAuthFoursquareGateway()
 				.accessToken(client_id, client_secret, grant_type, redirect_uri, code)
 		
+		callResponse.request().url().toString().replace("%3D","=").replace("%23","#")
+		
 		val response = callResponse.execute()
 		
 		val token : String = ""
 		if (response.isSuccessful) {
-			return response?.body()?.accessToken.toString()
+			return response?.body()!!.access_token
 		}
 		
 		return token

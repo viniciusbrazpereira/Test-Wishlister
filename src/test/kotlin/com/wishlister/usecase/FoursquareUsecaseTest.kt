@@ -21,6 +21,6 @@ class VenueUsecaseTest {
 }
 
 fun main (args : Array<String>) {
-	FoursquareUsecaseImpl().authFoursquare()
+	FoursquareUsecaseImpl().accessToken("WYZKLQCCTPPSLKHUDWX2IC5K30IRHU5P12J4LNZ22NFW0GHI#_=_")
 }
 
