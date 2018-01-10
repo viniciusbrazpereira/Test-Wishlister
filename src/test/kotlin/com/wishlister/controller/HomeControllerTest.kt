@@ -24,15 +24,6 @@ class HomeControllerTest {
         assertThat(body).isNotNull()
     }
 	
-	@Test
-    fun testGreetings() {
-        // When
-        val body = restTemplate.getForObject("/greetings", String::class.java)
-
-        // Then
-        assertThat(body).isNotNull()
- 
-    }
 }
 
 

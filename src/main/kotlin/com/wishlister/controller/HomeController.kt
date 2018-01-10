@@ -15,6 +15,11 @@ class HomeController {
         return "welcome"
     }
 	
+	@RequestMapping("/auth")
+    fun authFoursquare() {
+		foursquareUsecase.authFoursquare()
+    }
+	
 	@RequestMapping("/foursquare/callback")
     fun callback() : String {
 		foursquareUsecase.searchVenue()

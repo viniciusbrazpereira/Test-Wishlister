@@ -1,14 +1,19 @@
 package com.wishlister.gateways
 
+import com.wishlister.entities.PhotosDetailsResponse
 import com.wishlister.entities.SearchVenuesResponse
 import com.wishlister.entities.VenueDetailsResponse
-import com.wishlister.entities.PhotosDetailsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 public interface FoursquareGateway {
+	
+	@GET("/v2/venues/search")
+	fun authFoursquare(	@Query("client_id") client_id: String,
+						@Query("response_type") response_type: Int,
+						@Query("redirect_uri") redirect_uri: String) 
 	
 	@GET("/v2/venues/search")
 	fun searchVenue(	@Query("client_id") client_id: String,

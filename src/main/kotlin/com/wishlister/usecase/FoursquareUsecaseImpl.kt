@@ -14,10 +14,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 class FoursquareUsecaseImpl : FoursquareUsecase {
 	
 	private var baseUrl : String = "https://api.foursquare.com/"
+	private var baseUrlAuth : String = "https://foursquare.com/oauth2/authenticate"
 	private val client_id: String = "OJRCA0HT2UMLW4TJ4RER42OACUXITZ4VDMTUHXINVC5SYL1T"
 	private val client_secret: String = "UT1QIQK2PEWTRZNFWZNEJNBMNFOZZFXGUEZUJ5HD5VX3D2QF"
 	private val v: String = "20170801"
 	private val ll: String = "40.7243,-74.0018"
+	private val code: Int = 200
+	private var redirect_uri : String = "https://test-wishlister.herokuapp.com/foursquare/callback"
 	
 	private fun getRetrofit() : Retrofit {
 		val retrofit = Retrofit.Builder()
@@ -28,9 +31,22 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 		return retrofit
 	}
 	
+	private fun getRetrofitAuth() : Retrofit {
+		val retrofit = Retrofit.Builder()
+				.baseUrl(baseUrlAuth)
+				.addConverterFactory(GsonConverterFactory.create())
+				.build()
+		
+		return retrofit
+	}
+	
 	private fun getFoursquareGateway() : FoursquareGateway {
 		val foursquareGateway: FoursquareGateway = getRetrofit().create(FoursquareGateway::class.java)
 		return foursquareGateway
+	}
+	
+	override fun authFoursquare() {
+		getFoursquareGateway().authFoursquare(client_id, code, redirect_uri)
 	}
 	
 	override fun searchVenue() : List<Venue> {
