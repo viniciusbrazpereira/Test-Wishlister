@@ -1,15 +1,16 @@
 package com.wishlister.gateway
 
+import com.wishlister.entities.AccessTokenResponse
+import com.wishlister.entities.PhotosDetailsResponse
+import com.wishlister.entities.SearchVenuesResponse
 import com.wishlister.gateways.FoursquareGateway
 import com.wishlister.usecase.FoursquareUsecaseImpl
+import okhttp3.HttpUrl
 import okhttp3.ResponseBody
 import org.junit.Test
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.wishlister.entities.AccessTokenResponse
-import com.wishlister.entities.SearchVenuesResponse
-import com.wishlister.entities.PhotosDetailsResponse
 import kotlin.test.assertEquals
 
 class FoursquareGatewayTest {
@@ -88,7 +89,5 @@ class FoursquareGatewayTest {
 		
 		assertEquals(callResponse.request().url().toString(), url)
 	}
-	
-	
 }
 
