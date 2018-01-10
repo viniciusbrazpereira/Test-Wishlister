@@ -19,8 +19,3 @@ class VenueUsecaseTest {
 		assertTrue(photos.size > 0)
 	}
 }
-
-fun main (args : Array<String>) {
-	FoursquareUsecaseImpl().accessToken("WYZKLQCCTPPSLKHUDWX2IC5K30IRHU5P12J4LNZ22NFW0GHI#_=_")
-}
-

@@ -12,5 +12,7 @@ public interface FoursquareUsecase {
 	fun searchVenue() : List<Venue>
 	
 	fun photos(venueId : String) : List<Item>
+	
+	fun findVenue(venueId : String) : Venue
 }
 

@@ -107,7 +107,7 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
         return list!!.toList()
     }
 	
-	fun findVenue(venueId : String) : Venue {
+	override fun findVenue(venueId : String) : Venue {
 		val retrofit = Retrofit.Builder()
 				.baseUrl(baseUrl)
 				.addConverterFactory(GsonConverterFactory.create())
