@@ -1,25 +1,27 @@
 package com.wishlister.usecase
 
-import com.wishlister.entities.SearchVenuesResponse
-import com.wishlister.entities.VenueDetailsResponse
-import com.wishlister.entities.VenueResponse
-import com.wishlister.entities.Venue
 import com.wishlister.entities.Item
 import com.wishlister.entities.PhotosDetailsResponse
-import com.wishlister.entities.Category
+import com.wishlister.entities.SearchVenuesResponse
+import com.wishlister.entities.Venue
+import com.wishlister.entities.VenueDetailsResponse
+import com.wishlister.entities.VenueResponse
 import com.wishlister.gateways.FoursquareGateway
+import okhttp3.ResponseBody
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import okhttp3.HttpUrl
 
 class FoursquareUsecaseImpl : FoursquareUsecase {
 	
 	private var baseUrl : String = "https://api.foursquare.com/"
-	private var baseUrlAuth : String = "https://foursquare.com/oauth2/authenticate"
+	private var baseUrlAuth : String = "https://foursquare.com/"
 	private val client_id: String = "OJRCA0HT2UMLW4TJ4RER42OACUXITZ4VDMTUHXINVC5SYL1T"
 	private val client_secret: String = "UT1QIQK2PEWTRZNFWZNEJNBMNFOZZFXGUEZUJ5HD5VX3D2QF"
 	private val v: String = "20170801"
 	private val ll: String = "40.7243,-74.0018"
-	private val code: Int = 200
+	private val code: String = "code"
 	private var redirect_uri : String = "https://test-wishlister.herokuapp.com/foursquare/callback"
 	
 	private fun getRetrofit() : Retrofit {
@@ -45,8 +47,22 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 		return foursquareGateway
 	}
 	
-	override fun authFoursquare() {
-		getFoursquareGateway().authFoursquare(client_id, code, redirect_uri)
+	private fun getAuthFoursquareGateway() : FoursquareGateway {
+		val foursquareGateway: FoursquareGateway = getRetrofitAuth().create(FoursquareGateway::class.java)
+		return foursquareGateway
+	}
+	
+	override fun authFoursquare() : String{
+		val callResponse : Call<ResponseBody> = getAuthFoursquareGateway().authFoursquare(client_id, code, redirect_uri)
+		val response = callResponse.execute()
+		
+		val url : String = ""
+		if (response.isSuccessful) {
+			val urlRedirect : HttpUrl = response.raw().request().url()
+			return urlRedirect!!.toString()
+		}
+		
+		return url
 	}
 	
 	override fun searchVenue() : List<Venue> {

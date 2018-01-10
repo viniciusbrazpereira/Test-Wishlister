@@ -5,7 +5,7 @@ import com.wishlister.entities.Item
 
 public interface FoursquareUsecase {
 	
-	fun authFoursquare()
+	fun authFoursquare() : String
 	
 	fun searchVenue() : List<Venue>
 	

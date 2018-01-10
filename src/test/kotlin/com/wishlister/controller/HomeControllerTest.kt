@@ -24,6 +24,15 @@ class HomeControllerTest {
         assertThat(body).isNotNull()
     }
 	
+	@Test
+    fun testAuth() {
+        // When
+        val body = restTemplate.getForObject("/auth", String::class.java)
+
+        // Then
+        assertThat(body).isNotNull()
+    }
+	
 }
 
 

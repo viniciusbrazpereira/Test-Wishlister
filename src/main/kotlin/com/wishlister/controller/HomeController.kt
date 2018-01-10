@@ -16,8 +16,8 @@ class HomeController {
     }
 	
 	@RequestMapping("/auth")
-    fun authFoursquare() {
-		foursquareUsecase.authFoursquare()
+    fun authFoursquare() : String {
+		 return "redirect:" + foursquareUsecase.authFoursquare()
     }
 	
 	@RequestMapping("/foursquare/callback")

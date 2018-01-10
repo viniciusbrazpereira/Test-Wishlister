@@ -20,3 +20,7 @@ class VenueUsecaseTest {
 	}
 }
 
+fun main (args : Array<String>) {
+	FoursquareUsecaseImpl().authFoursquare()
+}
+
