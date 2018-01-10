@@ -7,6 +7,8 @@ public interface FoursquareUsecase {
 	
 	fun authFoursquare() : String
 	
+	fun accessToken(code : String) : String
+	
 	fun searchVenue() : List<Venue>
 	
 	fun photos(venueId : String) : List<Item>

@@ -3,6 +3,7 @@ package com.wishlister.gateways
 import com.wishlister.entities.PhotosDetailsResponse
 import com.wishlister.entities.SearchVenuesResponse
 import com.wishlister.entities.VenueDetailsResponse
+import com.wishlister.entities.AccessTokenResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,6 +16,13 @@ public interface FoursquareGateway {
 	fun authFoursquare(	@Query("client_id") client_id: String,
 						@Query("response_type") response_type: String,
 						@Query("redirect_uri") redirect_uri: String) : Call<ResponseBody>
+	
+	@GET("/oauth2/access_token")
+	fun accessToken(	@Query("client_id") client_id: String,
+					@Query("client_secret") client_secret: String,
+					@Query("grant_type") grant_type: String,
+					@Query("redirect_uri") redirect_uri: String,
+					@Query("code") code: String) : Call<AccessTokenResponse>
 	
 	@GET("/v2/venues/search")
 	fun searchVenue(	@Query("client_id") client_id: String,

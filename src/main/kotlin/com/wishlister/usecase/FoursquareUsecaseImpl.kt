@@ -1,5 +1,6 @@
 package com.wishlister.usecase
 
+import com.wishlister.entities.AccessTokenResponse
 import com.wishlister.entities.Item
 import com.wishlister.entities.PhotosDetailsResponse
 import com.wishlister.entities.SearchVenuesResponse
@@ -7,11 +8,12 @@ import com.wishlister.entities.Venue
 import com.wishlister.entities.VenueDetailsResponse
 import com.wishlister.entities.VenueResponse
 import com.wishlister.gateways.FoursquareGateway
+import okhttp3.HttpUrl
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.HttpUrl
 
 class FoursquareUsecaseImpl : FoursquareUsecase {
 	
@@ -22,7 +24,10 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 	private val v: String = "20170801"
 	private val ll: String = "40.7243,-74.0018"
 	private val code: String = "code"
+	private val grant_type: String = "authorization_code"
 	private var redirect_uri : String = "https://test-wishlister.herokuapp.com/foursquare/callback"
+	
+	private val access_token: String? = "ACCESS_TOKEN"
 	
 	private fun getRetrofit() : Retrofit {
 		val retrofit = Retrofit.Builder()
@@ -53,16 +58,33 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 	}
 	
 	override fun authFoursquare() : String{
-		val callResponse : Call<ResponseBody> = getAuthFoursquareGateway().authFoursquare(client_id, code, redirect_uri)
+		val callResponse : Call<ResponseBody> = getAuthFoursquareGateway()
+				.authFoursquare(client_id, code, redirect_uri)
+		
 		val response = callResponse.execute()
 		
 		val url : String = ""
 		if (response.isSuccessful) {
 			val urlRedirect : HttpUrl = response.raw().request().url()
-			return urlRedirect!!.toString()
+			return urlRedirect.toString()
 		}
 		
 		return url
+	}
+	
+	override fun accessToken(code : String) : String{
+		val callResponse : Call<AccessTokenResponse> = getAuthFoursquareGateway()
+				.accessToken(client_id, client_secret, grant_type, redirect_uri, code)
+		
+		val response = callResponse.execute()
+		
+		val token : String = ""
+		if (response.isSuccessful) {
+			println(response?.body()?.accessToken)
+			return response?.body()?.accessToken.toString()
+		}
+		
+		return token
 	}
 	
 	override fun searchVenue() : List<Venue> {
