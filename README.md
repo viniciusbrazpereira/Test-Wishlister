@@ -3,7 +3,7 @@
 Wishlister a site where you can see your friends’ recent foursquare check- ins and you can add the venues to a wishlist.
 
 
-Arquitetura do Projeto
+Project Architecture
 ----------------------
 * [kotlin 1.1.4] -  Statically typed programming language for modern multiplatform applications
 * [Maven 3.0.5] - Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information. 
