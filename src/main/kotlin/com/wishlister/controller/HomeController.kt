@@ -26,7 +26,6 @@ class HomeController {
     fun callback(@RequestParam(value = "code") code: String, model : Model) : String {
 		val token = foursquareUsecase.accessToken(code)
 		model.addAttribute("token", token)
-		model.addAttribute("token2", "tokenTest")
         return "venues"
     }
 
