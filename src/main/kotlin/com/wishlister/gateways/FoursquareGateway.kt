@@ -23,7 +23,7 @@ public interface FoursquareGateway {
 					@Query("client_secret") client_secret: String,
 					@Query("grant_type") grant_type: String,
 					@Query("redirect_uri") redirect_uri: String,
-					@Query(value = "code", encoded = true) code: String) : Call<AccessTokenResponse>
+					@Query(value = "code", encoded = false) code: String) : Call<AccessTokenResponse>
 	
 	@GET("/v2/venues/search")
 	fun searchVenue(	@Query("client_id") client_id: String,

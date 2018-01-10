@@ -32,36 +32,22 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 		val redirect_uri : String = "https://test-wishlister.herokuapp.com/foursquare/callback"
 	}
 	
-	private fun getRetrofit() : Retrofit {
+	private fun getRetrofit(url : String) : Retrofit {
 		val retrofit = Retrofit.Builder()
-				.baseUrl(baseUrl)
+				.baseUrl(url)
 				.addConverterFactory(GsonConverterFactory.create())
 				.build()
 		
 		return retrofit
 	}
 	
-	private fun getRetrofitAuth() : Retrofit {
-		val retrofit = Retrofit.Builder()
-				.baseUrl(baseUrlAuth)
-				.addConverterFactory(GsonConverterFactory.create())
-				.build()
-		
-		return retrofit
-	}
-	
-	private fun getFoursquareGateway() : FoursquareGateway {
-		val foursquareGateway: FoursquareGateway = getRetrofit().create(FoursquareGateway::class.java)
-		return foursquareGateway
-	}
-	
-	private fun getAuthFoursquareGateway() : FoursquareGateway {
-		val foursquareGateway: FoursquareGateway = getRetrofitAuth().create(FoursquareGateway::class.java)
+	private fun getFoursquareGateway(url : String) : FoursquareGateway {
+		val foursquareGateway: FoursquareGateway = getRetrofit(url).create(FoursquareGateway::class.java)
 		return foursquareGateway
 	}
 	
 	override fun authFoursquare() : String{
-		val callResponse : Call<ResponseBody> = getAuthFoursquareGateway()
+		val callResponse : Call<ResponseBody> = getFoursquareGateway(baseUrlAuth)
 				.authFoursquare(client_id, code, redirect_uri)
 		
 		val response = callResponse.execute()
@@ -76,10 +62,8 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 	}
 	
 	override fun accessToken(code : String) : String{
-		val callResponse : Call<AccessTokenResponse> = getAuthFoursquareGateway()
+		val callResponse : Call<AccessTokenResponse> = getFoursquareGateway(baseUrlAuth)
 				.accessToken(client_id, client_secret, grant_type, redirect_uri, code)
-		
-		callResponse.request().url().toString().replace("%3D","=").replace("%23","#")
 		
 		val response = callResponse.execute()
 		
@@ -92,7 +76,7 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 	}
 	
 	override fun searchVenue() : List<Venue> {
-		val callResponse = getFoursquareGateway().searchVenue(client_id, client_secret, v, ll)
+		val callResponse = getFoursquareGateway(baseUrl).searchVenue(client_id, client_secret, v, ll)
 		val response = callResponse.execute()
 		
 		val listVenue : MutableList<Venue>? = mutableListOf<Venue>()
@@ -108,7 +92,7 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
     }
 	
 	override fun photos(venueId : String) : List<Item> {
-		val callResponse = getFoursquareGateway().photos(venueId, client_id, client_secret, v)
+		val callResponse = getFoursquareGateway(baseUrl).photos(venueId, client_id, client_secret, v)
 		val response = callResponse.execute()
 		
 		val list : MutableList<Item>? = mutableListOf<Item>()
