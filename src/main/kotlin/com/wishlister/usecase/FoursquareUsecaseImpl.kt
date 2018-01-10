@@ -80,7 +80,6 @@ class FoursquareUsecaseImpl : FoursquareUsecase {
 		
 		val token : String = ""
 		if (response.isSuccessful) {
-			println(response?.body()?.accessToken)
 			return response?.body()?.accessToken.toString()
 		}
 		
