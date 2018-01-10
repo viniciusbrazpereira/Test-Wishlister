@@ -18,6 +18,11 @@ _NOTE: The following build command assumes you have configured your Maven user s
 2. Type this command to build and deploy the archive:
 
         mvn clean install
+        
+3. This will generate a JAR file in `target / Test-Wishlister-1.0-SNAPSHOT.jar`.
+4. run on the command within the directory /target 
+		
+		java -jar Test-Wishlister-1.0-SNAPSHOT.jar    
  
 
 Access the application 
