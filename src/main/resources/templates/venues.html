@@ -3,74 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="icon" href="https://getbootstrap.com/favicon.ico" />
-
     <title>Wish List</title>
 
     <!-- Bootstrap core CSS -->
-    <!-- <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+ 
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+ 
+ 	<!-- CSS	
+    <link href="../static/css/guru.css"
+          th:href="@{css/guru.css}" rel="stylesheet" media="screen"/>
+     -->
 
-    <!-- Custom styles for this template -->
-    <link href="../static/css/index.css" th:href="@{css/index.css}" rel="stylesheet" media="screen" />
-    
-	<script type="text/javascript" src="static/js/jq.js"></script>
-	<script type="text/javascript" src="static/js/jquery_cookies.js"></script>
-	<script type="text/javascript" src="static/js/json2.js"></script>
-	<script type="text/javascript" src="static/js/underscore.js"></script>
-	<script type="text/javascript" src="static/js/backbone.js"></script>
-	<script type="text/javascript" src="static/js/jquery-wishlist.js"></script>
   </head>
 
   <body>
 	<header>
-		<div class="navbar navbar-dark bg-dark">
-			<div class="container d-flex justify-content-between">
-				<a href="#" class="navbar-brand">Integration With Foursquare</a>
-		    </div>
+		<div class="navbar navbar-default navbar-static-top">
+			<div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">Integration With Foursquare</a>
+			    </div>
+			</div>
 		</div>
 	</header>
-	
-	<div class="wrapper">
-		<div class="header">
-			<h2>jQuery Wishlist - Example</h2>
-		</div>
-		
-		<div class="content">
-			<div class="userbar">
-				<div class="right">
-					<a class="wishCounter"></a>
-				</div>
-			</div>
-			
-			<div class="page">
-				<div class="item wishItem">
-					<img src="../static/images/mestolo.jpg" th:src="@{../static/images/mestolo.jpg}" />
-					<a class="wishAction addToWish" data-img="images/mestolo.jpg" data-title="Mestolo" data-id="1" href="#"></a>
-					<h5>Mestolo</h5>
-				</div>
-				
-				<div class="item wishItem">
-					<img src="images/contenitore.jpg" />
-					<a class="wishAction addToWish" data-img="images/contenitore.jpg" data-title="Contenitore" data-id="2" href="#"></a>
-					<h5>Contenitore</h5>
-				</div>
-				
-				<div class="item wishItem">
-					<img src="images/coperchio.jpg" />
-					<a class="wishAction addToWish" data-img="images/coperchio.jpg" data-title="Coperchio" data-id="9" href="#"></a>
-					<h5>Coperchio</h5>
-				</div>
-			</div>
-			
-			<div class="wishBar">
-				<div class="WB_righSide">
-					<a id="clearWish" class="trashIcon" title="Remove All" href="#">Remove</a>
-					<a title="Wishlist Details" href="simple.php">Details &raquo;</a>
-				</div>
-				<div id="wishList"><!-- list of wished item --></div>
-			</div>
-		</div>
-	</div>
 	
 	<main role="main">
  		<div class="album text-muted">

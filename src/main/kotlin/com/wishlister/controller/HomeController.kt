@@ -13,11 +13,6 @@ class HomeController {
 	
 	private val foursquareUsecase : FoursquareUsecase = FoursquareUsecaseImpl()
 	
-	@RequestMapping("/welcome")
-    fun welcome() : String {
-        return "welcome"
-    }
-	
 	@RequestMapping("/auth")
     fun authFoursquare() : String {
 		 return "redirect:" + foursquareUsecase.authFoursquare()

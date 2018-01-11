@@ -28,9 +28,9 @@ _NOTE: The following build command assumes you have configured your Maven user s
 Access the application 
 -------------------------
 
-The application will be running at the following URL: <http://localhost:8080/welcome>
+The application will be running at the following URL: <http://localhost:8080>
 
-Or Website URL: <https://test-wishlister.herokuapp.com/welcome>
+Or Website URL: <https://test-wishlister.herokuapp.com>
 
 
 Contacts
