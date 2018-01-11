@@ -28,13 +28,13 @@
         		<div class="container">
 		   		<div class="card-deck">
 		   			<div th:unless="${#lists.isEmpty(venues)}">
-			              <dl th:each="venue : ${venues}">
-			                    <div class="card" style="width: 18rem;">
+			              <dl th:each="venue , row: ${venues}">
+								<div class="card" style="width: 18rem;">
 								  	<img src="https://igx.4sqi.net/img/general/300x300/5163668_xXFcZo7sU8aa1ZMhiQ2kIP7NllD48m7qsSwr1mJnFj4.jpg" class="card-img-top" width="300" height="240" />
 								    <div class="card-body">
 								    		<div class="row">
 				  							<div class="col-sm-6">
-				  								<a href="#" class="btn btn-primary"></a>
+				  								<a href="#" class="btn btn-primary">Del</a>
 				  							</div>
 				  							<div class="col-sm-6">
 				  								<p class="card-text"><p th:text="${venue.name}" /></p>
@@ -48,7 +48,6 @@
 	     	</div>
 	     </div>
 	 </main>
-
     
   </body>
 </html>
