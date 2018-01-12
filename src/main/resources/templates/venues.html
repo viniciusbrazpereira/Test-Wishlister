@@ -6,17 +6,15 @@
     <title>Wish List</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
           rel="stylesheet" media="screen" />
  
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
             th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
  
- 	<!-- CSS	
-    <link href="../static/css/guru.css"
-          th:href="@{css/guru.css}" rel="stylesheet" media="screen"/>
-     -->
+ 	<!-- CSS -->	
+    <link th:href="@{/css/wishlist.css}" rel="stylesheet" media="screen"/>
 
   </head>
 
@@ -32,31 +30,32 @@
 	</header>
 	
 	<main role="main">
- 		<div class="album text-muted">
-        		<div class="container">
-		   		<div class="card-deck">
-		   			<div class="card" style="width: 18rem;">
-					  	<img src="https://igx.4sqi.net/img/general/300x300/5163668_xXFcZo7sU8aa1ZMhiQ2kIP7NllD48m7qsSwr1mJnFj4.jpg" class="card-img-top" width="300" height="240" />
-					    <div class="card-body">
-					    		<div class="row">
-	  							<div class="col-sm-6">
-	  								<a href="#" class="btn btn-primary">Del</a>
+		<div class="content">
+			<div class="header">
+				<h2>Washlist</h2>
+			</div>
+				
+			<div class="page card-deck" th:unless="${#lists.isEmpty(venues)}">
+				<dl th:each="venue , row: ${venues}">
+					<div class="item wishedItem card">
+						<div class="card-body">
+							<div class="alert alert-info" role="alert">
+							  <p th:text="${venue.name}" />
+							</div>
+							
+							<img src="https://igx.4sqi.net/img/general/250x250/5163668_xXFcZo7sU8aa1ZMhiQ2kIP7NllD48m7qsSwr1mJnFj4.jpg" />
+							
+							<div class="row">
+								<div class="col-sm-12">
+	  								<a href="#" class="btn  btn-lg btn-primary">Remover</a>
 	  							</div>
-	  							<div class="col-sm-6">
-	  								<p class="card-text"></p>
-	  							</div>
-	  						</div>	
+							</div>
 						</div>
 					</div>
-		   		
-		   			<div th:unless="${#lists.isEmpty(venues)}">
-		            		<dl th:each="venue , row: ${venues}">
-							<p th:text="${venue.name}" />		
-		              	</dl>
-			        </div>
-				</div>
-	     	</div>
-	     </div>
+				</dl>
+			</div>
+		</div>
+	     
 	 </main>
     
   </body>
