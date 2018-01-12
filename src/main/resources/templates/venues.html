@@ -6,7 +6,7 @@
     <title>Wish List</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
           rel="stylesheet" media="screen" />
  
@@ -43,7 +43,8 @@
 							  <p th:text="${venue.name}" />
 							</div>
 							
-							<img src="https://igx.4sqi.net/img/general/250x250/5163668_xXFcZo7sU8aa1ZMhiQ2kIP7NllD48m7qsSwr1mJnFj4.jpg" />
+							<img th:unless="${#lists.isEmpty(venue.items)}" th:src="${venue.items[0].prefix} + '250x250' + ${venue.items[0].suffix}" />
+							<img th:unless="${not #lists.isEmpty(venue.items)}" th:src="@{/img/noimage.jpg}" />
 							
 							<div class="row">
 								<div class="col-sm-12">

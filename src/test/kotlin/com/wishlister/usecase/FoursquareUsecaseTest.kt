@@ -19,3 +19,12 @@ class VenueUsecaseTest {
 		assertTrue(photos.size > 0)
 	}
 }
+
+fun main (args : Array<String>) {
+	val foursquareUsecase : FoursquareUsecase = FoursquareUsecaseImpl()
+	val venues : List<Venue> = foursquareUsecase.searchVenue()
+	
+	for(venue in venues) {
+		venue.items = foursquareUsecase.photos(venue.id)
+	}
+}

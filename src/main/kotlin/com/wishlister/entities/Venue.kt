@@ -17,7 +17,8 @@ public data class Venue
     val verified:Boolean,
     val stats:Stats,
     var ratingAvailability:RatingLoadingStatus = RatingLoadingStatus.NOT_LOADED,
-    var rating:Double? = null
+    var rating:Double? = null,
+	var items : List<Item>?
 ) {
 	
 }
@@ -25,6 +26,6 @@ public data class Venue
 fun Venue () : Venue{
 	val location : Location = Location(null,null,null,null,null,null,null,null,null)
 	val stats : Stats = Stats(0, 0, 0)
-	return Venue("","", location, null,false, stats, RatingLoadingStatus.NOT_LOADED, null) 
+	return Venue("","", location, null,false, stats, RatingLoadingStatus.NOT_LOADED, null, null) 
 }
 

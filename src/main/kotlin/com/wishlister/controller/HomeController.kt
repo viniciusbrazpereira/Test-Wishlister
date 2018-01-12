@@ -23,6 +23,10 @@ class HomeController {
 		val token = foursquareUsecase.accessToken(code)
 		val venues : List<Venue> = foursquareUsecase.searchVenue()
 		
+		for(venue in venues) {
+			venue.items = foursquareUsecase.photos(venue.id)
+		}
+		
 		model.addAttribute("token", token)
 		model.addAttribute("venues", venues)
         return "venues"
